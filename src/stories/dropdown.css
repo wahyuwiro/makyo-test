@@ -1,0 +1,73 @@
+  #storybook-root {
+    width: 100%;
+    margin-top: 0 !important;
+  }
+  .dropdown-container {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Space between label and dropdown */
+    width: 100%;
+  }
+  
+  /* Title (left column) */
+  .dropdown-title {
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  /* Dropdown wrapper (right column) */
+  .dropdown-wrapper {
+    flex-grow: 1;
+    position: relative;
+  }
+  .dropdown-button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    min-height: 35px;
+  }
+  
+  /* Outline version */
+  .dropdown-button-outline {
+    background-color: #e1e3e5;
+  }
+
+  .dropdown-options {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .dropdown-search {
+    width: calc(100% - 16px);
+    padding: 4px;
+    margin: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .dropdown-option {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .dropdown-option-active {
+    background-color: lightgray;
+  }
+  
+  .dropdown-no-options {
+    padding: 8px;
+    color: gray;
+    text-align: center;
+  }
+  
