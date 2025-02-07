@@ -41,7 +41,7 @@ export const Default: Story = {
     multiple: true,
     searchable: true,
     portal: true,
-    outline: true
+    outline: false
   },
 };
 

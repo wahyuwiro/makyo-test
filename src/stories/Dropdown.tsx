@@ -45,7 +45,7 @@ export const Dropdown = ({
 
   return (
     <div className="w-full flex items-center gap-4">
-        <h2 className="text-md">Select</h2>
+        <h2 className="text-md">Select an option</h2>
 
         <div className="relative w-full">
             <Listbox value={selected} onChange={handleSelect} multiple={multiple}>
