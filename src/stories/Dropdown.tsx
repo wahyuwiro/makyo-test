@@ -52,7 +52,7 @@ export const Dropdown = ({
                 <Listbox.Button
                     className={clsx(
                         "w-full p-2 border rounded-md bg-white text-left shadow-sm focus:outline-none flex justify-between items-center",
-                        outline && "bg-[#e1e3e5]"
+                        outline && "!bg-[#e1e3e5]"
                     )}
                 >
                     <div className="flex flex-wrap gap-1">

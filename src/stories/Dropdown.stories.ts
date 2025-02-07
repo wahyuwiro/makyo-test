@@ -40,6 +40,8 @@ export const Default: Story = {
     options,
     multiple: true,
     searchable: true,
+    portal: true,
+    outline: true
   },
 };
 
