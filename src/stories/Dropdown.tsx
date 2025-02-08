@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { createPortal } from "react-dom";
 import { ChevronDown, Search, Delete } from "lucide-react"; 
@@ -27,7 +27,7 @@ export const Dropdown = ({
   onChange,
 }: DropdownProps) => {
     const [selected, setSelected] = useState<Option | Option[]>(
-        multiple ? [] : options[0]
+        multiple ? [] : undefined as unknown as Option
     );
   
   const [query, setQuery] = useState("");
@@ -93,6 +93,9 @@ export const Dropdown = ({
     </Transition>
   );
 
+  useEffect(() => {
+    console.log('selected :', selected);
+  }, [selected]);
   return (
     <div className="w-full flex items-center gap-4">
         <h2 className="text-md">Select</h2>
@@ -102,37 +105,54 @@ export const Dropdown = ({
                 <Listbox.Button
                     className={clsx(
                         "w-full p-2 border rounded-md bg-white text-left shadow-sm focus:outline-none flex justify-between items-center",
-                        outline && "!bg-[#e1e3e5]"
+                        outline && "bg-[#e1e3e5]"
                     )}
                 >
-                    <div className="flex flex-wrap gap-1">
+
+                    <div className="flex items-center justify-between w-full">
+                        <div className="flex flex-wrap gap-1">
                         {multiple && Array.isArray(selected) && selected.length > 0 ? (
-                        selected.map((opt) => (
+                            selected.map((opt) => (
                             <span
-                            key={opt.value}
-                            className="flex items-center gap-1 px-2 py-1 bg-gray-200 rounded-md text-sm"
+                                key={opt.value}
+                                className="flex items-center gap-1 px-2 py-1 bg-gray-200 rounded-md text-sm"
                             >
-                            {opt.label}
+                                {opt.label}
+                                <button
+                                className="text-gray-500 hover:text-red-500"
+                                onClick={(e) => {
+                                    e.stopPropagation(); // Prevent dropdown toggle
+                                    const newSelection = selected.filter((item) => item.value !== opt.value);
+                                    setSelected(newSelection);
+                                    onChange(newSelection);
+                                }}
+                                >
+                                <Delete className="w-4 h-4" />
+                                </button>
+                            </span>
+                            ))
+                        ) : !Array.isArray(selected) && selected?.label ? (
+                            <span className="flex items-center gap-1 px-2 py-1 bg-gray-200 rounded-md text-sm">
+                            {(selected as Option)?.label}
                             <button
                                 className="text-gray-500 hover:text-red-500"
                                 onClick={(e) => {
                                 e.stopPropagation(); // Prevent dropdown toggle
-                                const newSelection = selected.filter((item) => item.value !== opt.value);
-                                setSelected(newSelection);
-                                onChange(newSelection);
+                                setSelected(multiple ? [] : (undefined as unknown as Option));
+                                onChange([]);
                                 }}
                             >
-                                <Delete className="w-4 h-4" /> {/* Lucide X icon */}
+                                <Delete className="w-4 h-4" />
                             </button>
                             </span>
-                        ))
                         ) : (
-                        <span>{(selected as Option)?.label || "Select..."}</span>
+                            <span>Select...</span>
                         )}
+                        </div>
+                        <ChevronDown className="w-4 h-4 text-gray-400" />
                     </div>
+                    </Listbox.Button>
 
-                    <ChevronDown className="w-4 h-4 text-gray-400" />
-                </Listbox.Button>
 
                 {/* Render inside portal if enabled */}
                 {portal ? createPortal(dropdownContent, document.body) : dropdownContent}

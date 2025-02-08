@@ -18,6 +18,5 @@ This component supports **single/multiple selection**, **searchable options**, *
 
 ```sh
 git clone https://github.com/wahyuwiro/makyo-test.git
-cd your-repo
 npm install
 npm run storybook

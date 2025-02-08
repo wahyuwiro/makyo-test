@@ -39,8 +39,8 @@ export const Default: Story = {
   args: {
     options,
     multiple: true,
-    searchable: true,
-    portal: true,
+    searchable: false,
+    portal: false,
     outline: false
   },
 };
