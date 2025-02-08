@@ -1,8 +1,8 @@
 import React, { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
+import { createPortal } from "react-dom";
 import { ChevronDown, Search, Delete } from "lucide-react"; 
 import clsx from "clsx";
-import "./dropdown.css";
 
 export interface Option {
   value: string;
@@ -22,6 +22,7 @@ export const Dropdown = ({
   options,
   multiple = false,
   searchable = true,
+  portal = false,
   outline = false,
   onChange,
 }: DropdownProps) => {
@@ -42,10 +43,59 @@ export const Dropdown = ({
     onChange(options);
   };
 
+  const dropdownContent = (
+    <Transition
+      as={Fragment}
+      enter="transition-opacity duration-200"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
+      leave="transition-opacity duration-150"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
+    >
+      <Listbox.Options
+        className="absolute w-full bg-white border rounded-md shadow-md mt-2 max-h-60 overflow-auto z-[1050]"
+      >
+        {searchable && (
+          <div className="relative p-2">
+            <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              className="w-full p-2 pl-8 border-b focus:outline-none"
+              placeholder="Search..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+        )}
+
+        {filteredOptions.length === 0 ? (
+          <p className="p-2 text-gray-500">No options found</p>
+        ) : (
+          filteredOptions.map((option) => (
+            <Listbox.Option
+              key={option.value}
+              value={option}
+              className={({ active, selected }) =>
+                clsx("cursor-pointer p-2 hover:bg-gray-100", active && "bg-gray-200", selected && "font-semibold")
+              }
+            >
+              {({ selected }) => (
+                <div className="flex justify-between">
+                  <span>{option.label}</span>
+                  {selected && <span>✅</span>}
+                </div>
+              )}
+            </Listbox.Option>
+          ))
+        )}
+      </Listbox.Options>
+    </Transition>
+  );
 
   return (
     <div className="w-full flex items-center gap-4">
-        <h2 className="text-md">Select an option</h2>
+        <h2 className="text-md">Select</h2>
 
         <div className="relative w-full">
             <Listbox value={selected} onChange={handleSelect} multiple={multiple}>
@@ -84,55 +134,9 @@ export const Dropdown = ({
                     <ChevronDown className="w-4 h-4 text-gray-400" />
                 </Listbox.Button>
 
-                <Transition
-                    as={Fragment}
-                    enter="transition-opacity duration-200"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="transition-opacity duration-150"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                >
-                    <Listbox.Options className="absolute w-full bg-white border rounded-md shadow-md mt-2 max-h-60 overflow-auto  z-[1010]">
-                    {searchable && (
-                        <div className="relative">
-                            <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                            <input
-                                type="text"
-                                className="w-full p-2 pl-8 border-b focus:outline-none"
-                                placeholder="Search..."
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                            />
-                    </div>
-                    )}
+                {/* Render inside portal if enabled */}
+                {portal ? createPortal(dropdownContent, document.body) : dropdownContent}
 
-                    {filteredOptions.length === 0 ? (
-                        <p className="p-2 text-gray-500">No options found</p>
-                    ) : (
-                        filteredOptions.map((option) => (
-                        <Listbox.Option
-                            key={option.value}
-                            value={option}
-                            className={({ active, selected }) =>
-                            clsx(
-                                "cursor-pointer p-2 hover:bg-gray-100",
-                                active && "bg-gray-200",
-                                selected && "font-semibold"
-                            )
-                            }
-                        >
-                            {({ selected }) => (
-                            <div className="flex justify-between">
-                                <span>{option.label}</span>
-                                {selected && <span>✅</span>}
-                            </div>
-                            )}
-                        </Listbox.Option>
-                        ))
-                    )}
-                    </Listbox.Options>
-                </Transition>
             </Listbox>
         </div>
     </div>
