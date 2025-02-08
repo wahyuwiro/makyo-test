@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { Dropdown } from "./Dropdown";
+import { Dropdown } from "../components";
 
 // Storybook metadata
 const meta: Meta<typeof Dropdown> = {

@@ -2,6 +2,7 @@ import React, { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { createPortal } from "react-dom";
 import { ChevronDown, Search, Delete } from "lucide-react"; 
+
 import clsx from "clsx";
 
 export interface Option {
@@ -26,17 +27,16 @@ export const Dropdown = ({
   outline = false,
   onChange,
 }: DropdownProps) => {
-    const [selected, setSelected] = useState<Option | Option[]>(
-        multiple ? [] : undefined as unknown as Option
-    );
-  
+  const [selected, setSelected] = useState<Option | Option[]>(
+    multiple ? [] : undefined as unknown as Option
+  );
   const [query, setQuery] = useState("");
 
   const filteredOptions = query
-    ? options.filter((option) =>
-        option.label.toLowerCase().includes(query.toLowerCase())
-      )
-    : options;
+  ? options.filter((option) =>
+      option.label.toLowerCase().includes(query.toLowerCase())
+    )
+  : options;
 
   const handleSelect = (options: Option[]) => {
     setSelected(options);
@@ -95,10 +95,9 @@ export const Dropdown = ({
 
   return (
     <div className="w-full flex items-center gap-4">
-        <h2 className="text-md">Select</h2>
-
-        <div className="relative w-full">
-            <Listbox value={selected} onChange={handleSelect} multiple={multiple}>
+      <h2 className="text-md">Select</h2>
+      <div className="relative w-full">
+      <Listbox value={selected} onChange={handleSelect} multiple={multiple}>
                 <Listbox.Button
                     className={clsx(
                         "w-full p-2 border rounded-md bg-white text-left shadow-sm focus:outline-none flex justify-between items-center",
@@ -155,7 +154,7 @@ export const Dropdown = ({
                 {portal ? createPortal(dropdownContent, document.body) : dropdownContent}
 
             </Listbox>
-        </div>
+      </div>
     </div>
   );
 };

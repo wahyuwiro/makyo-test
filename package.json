@@ -2,12 +2,17 @@
   "name": "makyo-test",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/index.js", 
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "tsup",
+    "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
+    "publish": "npm run build && npm publish",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_fd63f032c18b047"
   },
@@ -39,6 +44,7 @@
     "postcss": "^8",
     "storybook": "^8.5.3",
     "tailwindcss": "^3.4.1",
+    "tsup": "^8.3.6",
     "typescript": "^5"
   },
   "eslintConfig": {
