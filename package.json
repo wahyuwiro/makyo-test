@@ -2,25 +2,25 @@
   "name": "makyo-test",
   "version": "0.1.0",
   "private": true,
-  "main": "dist/index.js", 
+  "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-
   "scripts": {
-    "build": "tsup",
+    "build": "next build", 
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "publish": "npm run build && npm publish",
     "build-storybook": "storybook build",
+    "build-package": "tsup",
+    "publish": "npm run build-package && npm publish", 
     "chromatic": "npx chromatic --project-token=chpt_fd63f032c18b047"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.474.0",
-    "next": "15.1.6",
+    "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
