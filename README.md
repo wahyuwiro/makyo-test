@@ -21,3 +21,9 @@ git clone https://github.com/wahyuwiro/makyo-test.git
 npm install
 npm run storybook
 npm run dev
+```
+## 🌐 Live Demo & Resources
+
+- **Deployed Component:** [makyo-test-eta.vercel.app](https://makyo-test-eta.vercel.app/)
+- **Storybook Deployment:** [Chromatic](https://67a68f9441444ee09ff4f530-auhfnmxmnl.chromatic.com/?path=/story/form-select-dropdown-field--default)
+- **Demo Video:** [YouTube](https://youtu.be/cmU8Slyxk_E)
