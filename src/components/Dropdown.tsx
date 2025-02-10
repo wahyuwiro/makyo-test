@@ -114,7 +114,7 @@ export const Dropdown = ({
                                 className="flex items-center gap-1 px-2 py-1 bg-gray-200 rounded-md text-sm"
                             >
                                 {opt.label}
-                                <button
+                                <div
                                 className="text-gray-500 hover:text-red-500"
                                 onClick={(e) => {
                                     e.stopPropagation(); // Prevent dropdown toggle
@@ -124,13 +124,13 @@ export const Dropdown = ({
                                 }}
                                 >
                                 <Delete className="w-4 h-4" />
-                                </button>
+                                </div>
                             </span>
                             ))
                         ) : !Array.isArray(selected) && selected?.label ? (
                             <span className="flex items-center gap-1 px-2 py-1 bg-gray-200 rounded-md text-sm">
                             {(selected as Option)?.label}
-                            <button
+                            <div
                                 className="text-gray-500 hover:text-red-500"
                                 onClick={(e) => {
                                 e.stopPropagation(); // Prevent dropdown toggle
@@ -139,7 +139,7 @@ export const Dropdown = ({
                                 }}
                             >
                                 <Delete className="w-4 h-4" />
-                            </button>
+                            </div>
                             </span>
                         ) : (
                             <span>Select...</span>

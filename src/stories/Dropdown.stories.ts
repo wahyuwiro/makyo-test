@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { Dropdown } from "../components";
+// import { Dropdown } from "./Dropdown"
 
 // Storybook metadata
 const meta: Meta<typeof Dropdown> = {
@@ -9,7 +10,7 @@ const meta: Meta<typeof Dropdown> = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
+  tags: [],
   argTypes: {
     multiple: { control: "boolean" },
     searchable: { control: "boolean" },

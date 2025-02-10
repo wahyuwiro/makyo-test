@@ -6,14 +6,14 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "next build", 
+    "build": "next build",
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build-package": "tsup",
-    "publish": "npm run build-package && npm publish", 
+    "publish": "npm run build-package && npm publish",
     "chromatic": "npx chromatic --project-token=chpt_fd63f032c18b047"
   },
   "dependencies": {
